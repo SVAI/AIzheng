@@ -1,6 +1,4 @@
-# AIzheng
-
-<img src="images/AIzhengLogo.png" height="200" width="400">
+<img src="images/AIzhengLogo.png" height="250" width="500">
 
 ## SVAI p1RCC Hackathon
 
