@@ -21,8 +21,8 @@ if __name__ == '__main__':
 	# retrieve worksheet containing the specific types of cancer
 	clinical = pd.read_excel('./PanTCGA_Expression_Data/PanTCGA_Worksheet-v1-20180514.xlsx', sheetname='Clinical')
 
-	# retrieve worksheet containing mapping
-	mapping = pd.read_excel('./PanTCGA_Expression_Data/PanTCGA_Worksheet-v1-20180514.xlsx', sheetname='File-Case-Mapping')
+	# retrieve joined worksheet
+	joined = pd.read_csv('./PanTCGA_Expression_Data/metadata.txt', delimiter='\t')
 
 	# retrieve panTCGA data
 	pan_kidney_data = pd.read_csv('./PanTCGA_Expression_Data/Kidney_FPKM_Quantile_No-Outliers_5_17_18.tab', sep='\t')
@@ -82,11 +82,51 @@ if __name__ == '__main__':
 			else:
 				print (l + ' not found')
 
-	print('writing files...')
-	healthy_df.to_csv('./healthy_kidney_data.csv', sep='\t', na_rep = 'NA')
-	unhealthy_df.to_csv('./unhealthy_kidney_data.csv', sep='\t',na_rep = 'NA')
+	print('writing healthy and unhealthy files...')
+	healthy_df.to_csv('./healthy_kidney_data.txt', sep='\t', na_rep = 'NA')
+	unhealthy_df.to_csv('./unhealthy_kidney_data.txt', sep='\t',na_rep = 'NA')
 	print('done')
 
+	stage_labels = {'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]}
+
+	for k in unhealthy:
+		for i in unhealthy[k]:
+			stage_labels[joined['tumor_stage'][i]].append(joined['GEM_Header'][i])
+
+	stage_i_df = pd.DataFrame()
+	for l in stage_labels['stage i']:
+		if l in pan_kidney_data.columns:
+			stage_i_df[l] = pan_kidney_data[l]
+		else:
+			print (l + ' not found')
+
+	stage_ii_df = pd.DataFrame()
+	for l in stage_labels['stage ii']:
+		if l in pan_kidney_data.columns:
+			stage_ii_df[l] = pan_kidney_data[l]
+		else:
+			print (l + ' not found')
+
+	stage_iii_df = pd.DataFrame()
+	for l in stage_labels['stage iii']:
+		if l in pan_kidney_data.columns:
+			stage_iii_df[l] = pan_kidney_data[l]
+		else:
+			print (l + ' not found')
+
+	stage_iv_df = pd.DataFrame()
+	for l in stage_labels['stage iv']:
+		if l in pan_kidney_data.columns:
+			stage_iv_df[l] = pan_kidney_data[l]
+		else:
+			print (l + ' not found')
+
+	print('writing different stage files...')
+	stage_i_df.to_csv('./stage_i_kidney_data.txt', sep='\t', na_rep = 'NA')
+	stage_ii_df.to_csv('./stage_ii_kidney_data.txt', sep='\t',na_rep = 'NA')
+	stage_iii_df.to_csv('./stage_iii_kidney_data.txt', sep='\t', na_rep = 'NA')
+	stage_iv_df.to_csv('./stage_iv_kidney_data.txt', sep='\t',na_rep = 'NA')
+	print('done')
 
 	# extract specific tumor stage data
 
