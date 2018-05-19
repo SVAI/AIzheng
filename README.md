@@ -1,6 +1,6 @@
 # AIzheng
 
-![alt_text](images/AIzhengLogo.png){:width="100px"}
+<img src="images/AIzhengLogo.png" height="24" width="48">
 
 ## SVAI p1RCC Hackathon
 
