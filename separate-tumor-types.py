@@ -21,6 +21,9 @@ if __name__ == '__main__':
 	# retrieve worksheet containing the specific types of cancer
 	clinical = pd.read_excel('./PanTCGA_Expression_Data/PanTCGA_Worksheet-v1-20180514.xlsx', sheetname='Clinical')
 
+	# retrieve worksheet containing mapping
+	mapping = pd.read_excel('./PanTCGA_Expression_Data/PanTCGA_Worksheet-v1-20180514.xlsx', sheetname='File-Case-Mapping')
+
 	# retrieve panTCGA data
 	pan_kidney_data = pd.read_csv('./PanTCGA_Expression_Data/Kidney_FPKM_Quantile_No-Outliers_5_17_18.tab', sep='\t')
 
@@ -80,12 +83,12 @@ if __name__ == '__main__':
 				print (l + ' not found')
 
 	print('writing files...')
-	healthy_df.to_csv('./healthy_kidney_data.csv', sep='\t')
-	unhealthy_df.to_csv('./unhealthy_kidney_data.csv', sep='\t')
-
+	healthy_df.to_csv('./healthy_kidney_data.csv', sep='\t', na_rep = 'NA')
+	unhealthy_df.to_csv('./unhealthy_kidney_data.csv', sep='\t',na_rep = 'NA')
 	print('done')
 
 
+	# extract specific tumor stage data
 
 
 
