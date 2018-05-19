@@ -105,46 +105,94 @@ if __name__ == '__main__':
 
 	stage_labels = {'kirc':{'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]},
 					'kirp':{'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]},
-					'kirch':{'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]}
+					'kich':{'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]}
 					}
 
 	for k in unhealthy:
 		for i in unhealthy[k]:
 			stage_labels[k][joined['tumor_stage'][i]].append(joined['GEM_Header'][i])
 
-	for l in stage_labels['stage i']:
-			if l in pan_kidney_data.columns:
 
-				stage_i_df[l] = pan_kidney_data[l]
+	print('Writing Kirc Stages...')
+	#KIRC STAGE 1
+	for l in stage_labels['kirc']['stage i']:
+			if l in pan_kidney_data.columns:
+				stage_i_kirc_df[l] = pan_kidney_data[l]
 			else:
 				print (l + ' not found')
 
+	#KIRC STAGE 2
+	for l in stage_labels['kirc']['stage ii']:
+			if l in pan_kidney_data.columns:
+				stage_ii_kirc_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KIRC STAGE 3
+	for l in stage_labels['kirc']['stage iii']:
+			if l in pan_kidney_data.columns:
+				stage_iii_kirc_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KIRC STAGE 4
+	for l in stage_labels['kirc']['stage iv']:
+			if l in pan_kidney_data.columns:
+				stage_iv_kirc_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
 
-	for l in stage_labels['stage ii']:
-		if l in pan_kidney_data.columns:
-			stage_ii_df[l] = pan_kidney_data[l]
-		else:
-			print (l + ' not found')
+	print('Writing Kirp Stages...')				
+	#KIRP STAGE 1
+	for l in stage_labels['kirp']['stage i']:
+			if l in pan_kidney_data.columns:
+				stage_i_kirp_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KIRP STAGE 2
+	for l in stage_labels['kirp']['stage ii']:
+			if l in pan_kidney_data.columns:
+				stage_ii_kirp_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KIRP STAGE 3
+	for l in stage_labels['kirp']['stage iii']:
+			if l in pan_kidney_data.columns:
+				stage_iii_kirp_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KIRP STAGE 4
+	for l in stage_labels['kirp']['stage iv']:
+			if l in pan_kidney_data.columns:
+				stage_iv_kirp_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
 
-
-	for l in stage_labels['stage iii']:
-		if l in pan_kidney_data.columns:
-			stage_iii_df[l] = pan_kidney_data[l]
-		else:
-			print (l + ' not found')
-
-
-	for l in stage_labels['stage iv']:
-		if l in pan_kidney_data.columns:
-			stage_iv_df[l] = pan_kidney_data[l]
-		else:
-			print (l + ' not found')
+	print('Writing Kich Stages...')	
+	#KICH STAGE 1
+	for l in stage_labels['kich']['stage i']:
+			if l in pan_kidney_data.columns:
+				stage_i_kich_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KICH STAGE 2
+	for l in stage_labels['kich']['stage ii']:
+			if l in pan_kidney_data.columns:
+				stage_ii_kich_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KICH STAGE 3
+	for l in stage_labels['kich']['stage iii']:
+			if l in pan_kidney_data.columns:
+				stage_iii_kich_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+	#KICH STAGE 4
+	for l in stage_labels['kich']['stage iv']:
+			if l in pan_kidney_data.columns:
+				stage_iv_kich_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
 
 	print('writing different stage files...')
-
-	#Also we need Normal
-
-
 	stage_i_kirc_df.to_csv('./stage_i_kirc_data.txt', sep='\t', na_rep = 'NA')
 	stage_i_kirp_df.to_csv('./stage_i_kirp_data.txt', sep='\t', na_rep = 'NA')
 	stage_i_kich_df.to_csv('./stage_i_kich_data.txt', sep='\t', na_rep = 'NA')
