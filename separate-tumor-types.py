@@ -4,14 +4,30 @@
 # panTCGA RNA-seq tumor dataset
 #
 
-import pandas as pd 
-import numpy as np 
+import pandas as pd
+import numpy as np
 
 NUM_TUMORS = 11092
 
 
 
 if __name__ == '__main__':
+
+	stage_i_kirc_df = pd.DataFrame()
+	stage_i_kirp_df = pd.DataFrame()
+	stage_i_kich_df = pd.DataFrame()
+
+	stage_ii_kirc_df = pd.DataFrame()
+	stage_ii_kirp_df = pd.DataFrame()
+	stage_ii_kich_df = pd.DataFrame()
+
+	stage_iii_kirc_df = pd.DataFrame()
+	stage_iii_kirp_df = pd.DataFrame()
+	stage_iii_kich_df = pd.DataFrame()
+
+	stage_iv_kirc_df = pd.DataFrame()
+	stage_iv_kirp_df = pd.DataFrame()
+	stage_iv_kich_df = pd.DataFrame()
 
 	print('reading data files...')
 
@@ -87,34 +103,37 @@ if __name__ == '__main__':
 	unhealthy_df.to_csv('./unhealthy_kidney_data.txt', sep='\t',na_rep = 'NA')
 	print('done')
 
-	stage_labels = {'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]}
+	stage_labels = {'kirc':{'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]},
+					'kirp':{'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]},
+					'kirch':{'not reported':[], 'stage i':[], 'stage ii':[], 'stage iii':[], 'stage iv':[]}
+					}
 
 	for k in unhealthy:
 		for i in unhealthy[k]:
-			stage_labels[joined['tumor_stage'][i]].append(joined['GEM_Header'][i])
+			stage_labels[k][joined['tumor_stage'][i]].append(joined['GEM_Header'][i])
 
-	stage_i_df = pd.DataFrame()
 	for l in stage_labels['stage i']:
-		if l in pan_kidney_data.columns:
-			stage_i_df[l] = pan_kidney_data[l]
-		else:
-			print (l + ' not found')
+			if l in pan_kidney_data.columns:
 
-	stage_ii_df = pd.DataFrame()
+				stage_i_df[l] = pan_kidney_data[l]
+			else:
+				print (l + ' not found')
+
+
 	for l in stage_labels['stage ii']:
 		if l in pan_kidney_data.columns:
 			stage_ii_df[l] = pan_kidney_data[l]
 		else:
 			print (l + ' not found')
 
-	stage_iii_df = pd.DataFrame()
+
 	for l in stage_labels['stage iii']:
 		if l in pan_kidney_data.columns:
 			stage_iii_df[l] = pan_kidney_data[l]
 		else:
 			print (l + ' not found')
 
-	stage_iv_df = pd.DataFrame()
+
 	for l in stage_labels['stage iv']:
 		if l in pan_kidney_data.columns:
 			stage_iv_df[l] = pan_kidney_data[l]
@@ -122,24 +141,26 @@ if __name__ == '__main__':
 			print (l + ' not found')
 
 	print('writing different stage files...')
-	stage_i_df.to_csv('./stage_i_kidney_data.txt', sep='\t', na_rep = 'NA')
-	stage_ii_df.to_csv('./stage_ii_kidney_data.txt', sep='\t',na_rep = 'NA')
-	stage_iii_df.to_csv('./stage_iii_kidney_data.txt', sep='\t', na_rep = 'NA')
-	stage_iv_df.to_csv('./stage_iv_kidney_data.txt', sep='\t',na_rep = 'NA')
+
+	#Also we need Normal
+
+
+	stage_i_kirc_df.to_csv('./stage_i_kirc_data.txt', sep='\t', na_rep = 'NA')
+	stage_i_kirp_df.to_csv('./stage_i_kirp_data.txt', sep='\t', na_rep = 'NA')
+	stage_i_kich_df.to_csv('./stage_i_kich_data.txt', sep='\t', na_rep = 'NA')
+
+	stage_ii_kirc_df.to_csv('./stage_ii_kirc_data.txt', sep='\t', na_rep = 'NA')
+	stage_ii_kirp_df.to_csv('./stage_ii_kirp_data.txt', sep='\t', na_rep = 'NA')
+	stage_ii_kich_df.to_csv('./stage_ii_kich_data.txt', sep='\t', na_rep = 'NA')
+
+	stage_iii_kirc_df.to_csv('./stage_iii_kirc_data.txt', sep='\t', na_rep = 'NA')
+	stage_iii_kirp_df.to_csv('./stage_iii_kirp_data.txt', sep='\t', na_rep = 'NA')
+	stage_iii_kich_df.to_csv('./stage_iii_kich_data.txt', sep='\t', na_rep = 'NA')
+
+	stage_iv_kirc_df.to_csv('./stage_iv_kirc_data.txt', sep='\t', na_rep = 'NA')
+	stage_iv_kirp_df.to_csv('./stage_iv_kirp_data.txt', sep='\t', na_rep = 'NA')
+	stage_iv_kich_df.to_csv('./stage_iv_kich_data.txt', sep='\t', na_rep = 'NA')
+
 	print('done')
 
 	# extract specific tumor stage data
-
-
-
-
-
-
-
-
-
-
-
-
-
-
