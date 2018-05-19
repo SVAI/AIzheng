@@ -1,6 +1,6 @@
 # AIzheng
 
-![alt text](https://github.com/SVAI/AIzheng/blob/master/AIzhengLogo.png)
+![alt text](https://github.com/SVAI/AIzheng/blob/master/AIzhengLogo.png | width=100)
 
 ## SVAI p1RCC Hackathon
 
