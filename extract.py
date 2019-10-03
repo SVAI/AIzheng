@@ -53,6 +53,7 @@ if __name__ == "__main__":
 
 	# extract samples that have labels
 	data = data[sample_names]
+	sample_info = sample_info.loc[sample_names]
 
 	# create labels dataframe
 	labels = pd.DataFrame({
